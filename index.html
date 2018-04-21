@@ -79,9 +79,6 @@ crossorigin=""/>
         mix-blend-mode: screen;
         height: 50vh;
       }
-      .page-offline {
-        display: none;
-      }
       #upload {
         display: inline-block;
         margin: 50px auto;
@@ -249,7 +246,8 @@ crossorigin=""/>
             } else {
               offlineHandler();
             }
-          }, 100)
+          }, 100);
+          onlineHandler();
         }
         onDomReady(function(){
           var btn = document.getElementById('upload')
@@ -277,13 +275,14 @@ crossorigin=""/>
             btn.innerHTML = 'Processing <span class="spinner"></span>';
             setTimeout(function() {
               btn.innerHTML = 'Ready! scroll down'
+              document.getElementById('mapPage').style.display = 'block';
             }, 2000)
             return false;
           }, false);
         });
       </script>
     </div>
-    <div class="page">
+    <div class="page page-offline" id="mapPage">
         <style>
           .demomap {
               height: 400px;
@@ -352,7 +351,7 @@ crossorigin=""/>
       var unknown = [
               [-37.7, 145],
               [-37.75, 144.8],
-              [-37.9, 144.9],
+              [-37.8, 144.9],
               [-37.74, 144,4],
               [-37.6, 145.2],
               [-37.92, 145.3],
@@ -363,24 +362,27 @@ crossorigin=""/>
               [-37.9, 145.2],
               [-37.74, 144.2],
       ]
-      
+
       onDomReady(function(){
+        var el0 = document.getElementById('mapPage');
         var el1 = document.getElementById('demomap1');
         var el2 = document.getElementById('demomap2');
-        var offset1 = el1.offsetTop
-        var offset2 = el2.offsetTop
         var map1Shown = false;
         var map2Shown = false;
-        
-        document.addEventListener('scroll', function(e) {
-          if (!map1Shown && document.body.scrollTop  + 300 > offset1){
-            placeMarkers(known, 300, map1);
-            map1Shown = true;
-          }
 
-          if (!map2Shown && document.body.scrollTop + 300 > offset2){
-            placeMarkers(unknown, 300, map2);
-            map2Shown = true;
+        document.addEventListener('scroll', function(e) {
+          if (el0.style.display == 'block') {
+            var offset1 = el1.offsetTop
+            var offset2 = el2.offsetTop
+            if (!map1Shown && document.body.scrollTop  + 300 > offset1){
+              placeMarkers(known, 300, map1);
+              map1Shown = true;
+            }
+
+            if (!map2Shown && document.body.scrollTop + 300 > offset2){
+              placeMarkers(unknown, 300, map2);
+              map2Shown = true;
+            }
           }
         })
       });
