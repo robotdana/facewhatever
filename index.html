@@ -5,6 +5,8 @@
     <style>
       body {
         --facebook-blue: rgba(63, 90, 147, 1.000);
+        --green: rgba(129, 192, 40, 1.000);
+        --rust: rgba(235, 121, 61, 1.000);
       }
       html,
       body {
@@ -16,6 +18,11 @@
         padding: 30px;
         box-sizing: border-box;
         position: relative;
+        background-color: black;
+        color: white;
+        background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0));
+        background-color: black;
+        font-size: 2em;
       }
       .page::after {
         content: '⬇';
@@ -27,13 +34,12 @@
         width: 100%;
         opacity: 0.5;
         font-size: 30px;
+
       }
-      .page-1 {
-        background: var(--facebook-blue);
+      .page-first {
+        background-color: var(--facebook-blue);
         color: white;
-        font-size: 10vh;
-        line-height: 1;
-        text-transform: uppercase;
+        font-size: 2.5em;
         display: flex;
         align-items: center;
       }
@@ -43,12 +49,51 @@
         letter-spacing: -0.05em;
         margin: 0;
         padding: 0;
+        font-size: 5em;
+        text-transform: uppercase;
+        line-height: 1;
       }
+      .page-download {
+        background-color: var(--rust);
+      }
+      .rotate {
+        display: inline-block;
+        transform: rotate(-90deg);
+        padding-bottom: 3px;
+      }
+      a, a:link, a:visited { color: inherit; }
     </style>
   </head>
   <body>
-    <div class="page page-1">
+    <div class="page page-first">
       <h1>What does facebook <em>really</em> know about you?</h1>
+    </div>
+    <div class="page page-what-facebook-has">
+      PASCAL's work goes here
+    </div>
+    <div class="page page-download">
+      <h1>How to download your facebook data:</h1>
+    </div>
+    <div class="page page-download">
+      <h1>Step 1.</h1>
+      <p>Log in to <a href="https://facebook.com">facebook</a> on a trusted computer (This unfortunately doesn't work on mobile)</p>
+    </div>
+    <div class="page page-download">
+      <h1>Step 2.</h1>
+      <p>Click on the <span class="rotate">&lsaquo;</span> in the top left, then on <a href="https://www.facebook.com/settings">settings</a></p>
+    </div>
+    <div class="page page-download">
+      <h1>Step 3.</h1>
+      <p>Click on <a href="https://www.facebook.com/settings?tab=your_facebook_information">Your facebook information</a></p>
+    </div>
+    <div class="page page-download">
+      <h1>Step 4.</h1>
+      <p>Click on "Download Your Information".</p>
+      <small>(Unfortunately Facebook thinks it's being sneaky and we can't give you a direct link to this step)</small>
+    </div>
+    <div class="page page-download">
+      <h1>Step 5.</h1>
+      <p>Leave everything selected &amp; Click on "Create File"</p>
     </div>
   </body>
 </html>
