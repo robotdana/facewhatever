@@ -64,6 +64,42 @@
       }
       a, a:link, a:visited { color: inherit; }
       p small { display: block; margin-top: -1em; }
+      .drop-target {
+        width: 80%;
+        border-radius: 10px;
+        background: rgba(255,255,255,0.5);
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: black;
+        mix-blend-mode: screen;
+        height: 50vh;
+      }
+      .page-offline {
+        display: none;
+      }
+      button {
+        display: inline-block;
+        margin: 50px auto;
+        font-size: 3em;
+        border-radius: 10px;
+        background: var(--green);
+        appearance: none;
+        border: 0;
+        cursor: pointer;
+        padding: 50px;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+      button:hover {
+        box-shadow: 0px 0px 10px 0px rgba(255,255,255,0.5);
+        background-image: linear-gradient(rgba(255,255,255,0.3),rgba(255,255,255,0))
+      }
+      button[disabled] {
+        background: red;
+        color: black;
+        cursor: not-allowed;
+      }
     </style>
   </head>
   <body>
@@ -163,7 +199,64 @@
       <img src="images/download.png" alt="Facebook exported data list">
     </div>
 
-    <div class="page page-download">
+    <div class="page page-upload">
+      <h1>Want to see what facebook knows about <strong>you</strong>?</h1>
+
+      <p>First, don't trust us: turn off your WI-FI before proceeding</p>
+      <script type="text/javascript">
+        function onDomReady(fn) {
+          if (document.readyState != 'loading'){
+            fn();
+          } else {
+            document.addEventListener('DOMContentLoaded', fn);
+          }
+        }
+        function classForEach(className, fn) {
+          Array.prototype.forEach.call(document.getElementsByClassName(className), fn)
+        }
+        function onOnlineOffline(onlineHandler, offlineHandler) {
+          setInterval(function(){
+            if (navigator.onLine) {
+              onlineHandler();
+            } else {
+              offlineHandler();
+            }
+          }, 100)
+        }
+        function onOnline(fn) {
+          if (navigator.onLine) {
+            fn();
+          }
+          document.addEventListener('online', fn)
+        }
+        onDomReady(function(){
+          var btn = document.getElementById('proceed')
+          onOnlineOffline(function() {
+            btn.setAttribute('disabled', 'disabled');
+            btn.innerHTML = 'Turn off your WIFI to proceed'
+            classForEach('page-offline', function(item) {
+              item.style.display = 'none'
+            });
+          }, function() {
+            btn.innerHTML = 'Drop your data here'
+            btn.removeAttribute('disabled');
+          })
+          btn.addEventListener('click', function() {
+            classForEach('page-offline', function(item) {
+              item.style.display = 'block'
+            });
+          })
+        });
+      </script>
+      <button id="proceed" disabled>
+        Turn off your WIFI to proceed
+      </button>
+    </div>
+    <div class="page page-offline">
+      <h1>PASCAL'S MAP</h1>
+    </div>
+
+    <div class="page page-what-facebook-has">
       <h1>Further resources to learn more</h1>
       <h3 id="moreinformation">More information</h3>
         <p>
