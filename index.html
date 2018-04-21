@@ -82,7 +82,7 @@
       .page-offline {
         display: none;
       }
-      button {
+      #upload {
         display: inline-block;
         margin: 50px auto;
         font-size: 3em;
@@ -94,15 +94,36 @@
         padding: 50px;
         text-transform: uppercase;
         font-weight: bold;
+        color: white;
       }
-      button:hover {
+      #upload:hover {
         box-shadow: 0px 0px 10px 0px rgba(255,255,255,0.5);
         background-image: linear-gradient(rgba(255,255,255,0.3),rgba(255,255,255,0))
       }
-      button[disabled] {
+      #upload[disabled] {
         background: red;
         color: black;
         cursor: not-allowed;
+      }
+      @keyframes spinner {
+        to { transform: rotate(360deg); }
+      }
+      .spinner {
+        position: relative;
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+      }
+      .spinner:before {
+        content: '';
+        box-sizing: border-box;
+        position: absolute;
+        width: 1em;
+        height: 1em;
+        border-radius: 50%;
+        border-top: 10px solid white;
+        border-right: 10px solid transparent;
+        animation: spinner .6s linear infinite;
       }
     </style>
   </head>
@@ -202,6 +223,9 @@
       <h1>Want to see what facebook knows about <strong>you</strong>?</h1>
 
       <p>First, don't trust us: turn off your WI-FI before proceeding</p>
+      <button id="upload" disabled>
+        Turn off your WIFI to proceed
+      </button>
       <script type="text/javascript">
         function onDomReady(fn) {
           if (document.readyState != 'loading'){
@@ -222,14 +246,8 @@
             }
           }, 100)
         }
-        function onOnline(fn) {
-          if (navigator.onLine) {
-            fn();
-          }
-          document.addEventListener('online', fn)
-        }
         onDomReady(function(){
-          var btn = document.getElementById('proceed')
+          var btn = document.getElementById('upload')
           onOnlineOffline(function() {
             btn.setAttribute('disabled', 'disabled');
             btn.innerHTML = 'Turn off your WIFI to proceed'
@@ -237,19 +255,28 @@
               item.style.display = 'none'
             });
           }, function() {
-            btn.innerHTML = 'Drop your data here'
+            if (btn.innerHTML == 'Turn off your WIFI to proceed') {
+              btn.innerHTML = 'Drop your data here';
+            }
             btn.removeAttribute('disabled');
           })
-          btn.addEventListener('click', function() {
-            classForEach('page-offline', function(item) {
-              item.style.display = 'block'
-            });
-          })
+          window.addEventListener('dragover', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            return false;
+          }, false);
+          window.addEventListener('drop', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            if (navigator.onLine) return;
+            btn.innerHTML = 'Processing <span class="spinner"></span>';
+            setTimeout(function() {
+              btn.innerHTML = 'Ready! scroll down'
+            }, 2000)
+            return false;
+          }, false);
         });
       </script>
-      <button id="proceed" disabled>
-        Turn off your WIFI to proceed
-      </button>
     </div>
     <div class="page page-offline">
       <h1>PASCAL'S MAP</h1>
