@@ -241,7 +241,7 @@ crossorigin=""/>
         }
         function onOnlineOffline(onlineHandler, offlineHandler) {
           setInterval(function(){
-            if (navigator.onLine) {
+            if (navigator.onLine && !window.pretendToBeOffline) {
               onlineHandler();
             } else {
               offlineHandler();
@@ -271,7 +271,7 @@ crossorigin=""/>
           window.addEventListener('drop', function(e) {
             e.stopPropagation();
             e.preventDefault();
-            if (navigator.onLine) return;
+            if (navigator.onLine && !window.pretendToBeOffline) return;
             btn.innerHTML = 'Processing <span class="spinner"></span>';
             setTimeout(function() {
               btn.innerHTML = 'Ready! scroll down'
