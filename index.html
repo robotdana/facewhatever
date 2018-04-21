@@ -13,6 +13,12 @@
         margin: 0; padding: 0; width: 100vw; min-height: 100vh;
         font-family: sans-serif;
       }
+      body {
+        scroll-snap-type: mandatory;
+
+        scroll-snap-destination: 0% 100%;
+        scroll-snap-points-y: repeat(100vh);
+      }
       .page {
         min-height: 100vh;
         padding: 30px;
@@ -23,6 +29,7 @@
         background-image: linear-gradient(rgba(255,255,255,0.4),rgba(255,255,255,0));
         background-color: black;
         font-size: 2em;
+        scroll-snap-align: start;
       }
       .page::after {
         content: '⬇';
@@ -56,12 +63,14 @@
       .page-download {
         background-color: var(--rust);
       }
-      .rotate {
-        display: inline-block;
-        transform: rotate(-90deg);
-        padding-bottom: 3px;
+      .page-download img {
+        max-width: 80vw;
+        vertical-align: baseline;
+        display: block;
+        margin: 2em auto;
       }
       a, a:link, a:visited { color: inherit; }
+      p small { display: block; margin-top: -1em; }
     </style>
   </head>
   <body>
@@ -125,24 +134,40 @@
     </div>
     <div class="page page-download">
       <h1>Step 1.</h1>
-      <p>Log in to <a href="https://facebook.com">facebook</a> on a trusted computer (This unfortunately doesn't work on mobile)</p>
+      <p>Log in to <a href="https://facebook.com">facebook</a> on a trusted computer</p>
+      <p><small>(This unfortunately doesn't work on mobile)</small></p>
+      <img src="images/log-in.png" alt="Facebook Log In screen">
     </div>
     <div class="page page-download">
       <h1>Step 2.</h1>
-      <p>Click on the <span class="rotate">&lsaquo;</span> in the top left, then on <a href="https://www.facebook.com/settings">settings</a></p>
+      <p>Click on the ▼ in the top right, then on <a href="https://www.facebook.com/settings">settings</a></p>
+      <img src="images/settings.png" alt="Facebook account menu">
     </div>
     <div class="page page-download">
       <h1>Step 3.</h1>
       <p>Click on <a href="https://www.facebook.com/settings?tab=your_facebook_information">Your facebook information</a></p>
+      <img src="images/yfi.png" alt="Facebook settings screen">
     </div>
     <div class="page page-download">
       <h1>Step 4.</h1>
       <p>Click on "Download Your Information".</p>
-      <small>(Unfortunately Facebook thinks it's being sneaky and we can't give you a direct link to this step)</small>
+      <p><small>(Unfortunately Facebook thinks it's being sneaky and we can't give you a direct link to this step)</small></p>
+      <img src="images/dyi.png" alt="Facebook's Your Information screen">
     </div>
     <div class="page page-download">
       <h1>Step 5.</h1>
       <p>Leave everything selected &amp; Click on "Create File"</p>
+      <img src="images/create-file.png" alt="Facebook's create a download of your information screen">
+    </div>
+    <div class="page page-download">
+      <h1>Step 6.</h1>
+      <p>After about an hour depending on how much information facebook has about you, Facebook will email you to let you know the file is ready to download</p>
+      <img src="images/email.png" alt="Facebook email about your data being ready">
+    </div>
+    <div class="page page-download">
+      <h1>Step 7.</h1>
+      <p>Click the Download button next to your most recent data export.</p>
+      <img src="images/download.png" alt="Facebook exported data list">
     </div>
   </body>
 </html>
