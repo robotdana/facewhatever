@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Face Whatever</title>
+    <style>
+      body {
+        --facebook-blue: rgba(63, 90, 147, 1.000);
+      }
+      html,
+      body {
+        margin: 0; padding: 0; width: 100vw; min-height: 100vh;
+        font-family: sans-serif;
+      }
+      .page {
+        min-height: 100vh;
+        padding: 30px;
+        box-sizing: border-box;
+        position: relative;
+      }
+      .page::after {
+        content: '⬇';
+        position: absolute;
+        bottom: 10px;
+        text-align: center;
+        pointer-events: none;
+        left: 0;
+        width: 100%;
+        opacity: 0.5;
+        font-size: 30px;
+      }
+      .page-1 {
+        background: var(--facebook-blue);
+        color: white;
+        font-size: 10vh;
+        line-height: 1;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+      }
+      h1 {
+        font-weight: bold;
+        line-height: 0.8;
+        letter-spacing: -0.05em;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page page-1">
+      <h1>What does facebook <em>really</em> know about you?</h1>
+    </div>
+  </body>
+</html>
